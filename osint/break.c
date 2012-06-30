@@ -40,7 +40,6 @@ This file is part of Macro SPITBOL.
 #if POLLING
 int	brkpnd;
 
-#if UNIX | WINNT
 #include <signal.h>
 #undef SigType
 #define SigType void
@@ -48,7 +47,6 @@ int	brkpnd;
 static SigType (*cstat)Params((int));
 #if WINNT
 static SigType (*bstat)Params((int));
-#endif
 void catchbrk Params((int sig));
 void rearmbrk Params((void));
 

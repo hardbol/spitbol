@@ -94,8 +94,3 @@ struct svfilehdr {
 #define L2PGSZ		12		/* Log base 2 of page size */
 #endif
 
-#if SUN4
-#define	PAGESIZE	PAGSIZ
-#define T_START     SEGSIZ   /* N_MAGIC, no dynamic loading */
-#endif					/* SUN4 */
-

@@ -43,9 +43,9 @@ This file is part of Macro SPITBOL.
 #include "port.h"
 #if PIPES
 
-#if UNIX
+#if LINUX
 #include <signal.h>
-#endif                  /* UNIX */
+#endif                  /* LINUX */
 
 #if WINNT
 #include <process.h>
@@ -59,7 +59,7 @@ int	pid;
 {
     int	deadpid, status;
     struct  chfcb   *chptr;
-#if UNIX
+#if LINUX
     SigType (*hstat)Params((int)),
             (*istat)Params((int)),
             (*qstat)Params((int));
@@ -88,6 +88,6 @@ int	pid;
     signal( SIGINT,istat );
     signal( SIGQUIT,qstat );
     signal( SIGHUP,hstat );
-#endif                  /* UNIX */
+#endif                  /* LINUX */
 }
 #endif					/* PIPES */

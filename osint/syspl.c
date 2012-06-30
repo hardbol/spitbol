@@ -47,13 +47,13 @@ This file is part of Macro SPITBOL.
 
 #include "port.h"
 
-#if POLLING & (UNIX | WINNT)
+#if POLLING & (LINUX | WINNT)
 #if WINNT
 int	pollevent Params((void));
 #endif
-#if UNIX
+#if LINUX
 #define pollevent()
-#endif          /* UNIX */
+#endif          /* LINUX */
 extern  rearmbrk Params((void));
 extern	int	brkpnd;
 #define stmtDelay PollCount
@@ -70,7 +70,7 @@ zyspl()
         pollevent();
 #endif					/* !ENGINE */
         SET_WA(stmtDelay);	/* Poll finished or Continue */
-#if !ENGINE & (WINNT | UNIX)
+#if !ENGINE & (WINNT | LINUX)
         if (brkpnd) {
             brkpnd = 0;		/* User interrupt */
             rearmbrk();		/* allow breaks again */

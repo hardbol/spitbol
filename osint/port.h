@@ -153,28 +153,10 @@ This file is part of Macro SPITBOL.
 #ifndef GCCi64
 #define GCCi64      0
 #endif
-#ifndef RS6
-#define RS6			0
-#endif
-#ifndef SUN4
-#define SUN4		0
-#endif
 
 /* operating system defs */
-#ifndef AIX3
-#define AIX3		0
-#endif
-#ifndef AIX4
-#define AIX4		0
-#endif
-#ifndef BSD43
-#define BSD43		0
-#endif
 #ifndef LINUX
 #define LINUX       0
-#endif
-#ifndef SOLARIS
-#define SOLARIS		0
 #endif
 #ifndef WINNT
 #define WINNT  		0
@@ -182,12 +164,6 @@ This file is part of Macro SPITBOL.
 
 #if WINNT | GCCi32
 #define SYSVERSION 0
-#endif
-#if SUN4
-#define SYSVERSION 3
-#endif
-#if AIX3 | AIX4
-#define SYSVERSION 6
 #endif
 #if GCCi64
 #define SYSVERSION 7
@@ -222,11 +198,6 @@ This file is part of Macro SPITBOL.
 #endif
 
 #define GCCx86 (GCCi32 | GCCi64)
-#define AIX (AIX3 | AIX4)
-
-#define SUN SUN4
-
-#define UNIX (AIX | BSD43 | LINUX | SOLARIS)
 
 typedef int   word;
 typedef unsigned int uword;
@@ -253,7 +224,7 @@ typedef long long IATYPE;
 /*
  * Define the data type returned by a call to signal()
  */
-#if UNIX
+#if LINUX
 #define SigType void
 #else
 #define	SigType int
@@ -303,19 +274,15 @@ typedef long long IATYPE;
 /	different DPMI platforms.
 */
 
-#if LINUX | WINNT | AIX | SOLARIS
+#if LINUX | WINNT
 #define CHUNK_SIZE	32768
 #define CHUNK_B_SIZE	(CHUNK_SIZE * sizeof(word))
 #define HEAP_SIZE	16777216	/* 16Mwords = 64Mbytes */
-#if SUN4 | LINUX | WINNT | AIX
+#if LINUX | WINNT
 #define OBJECT_SIZE	1048576		/* 1 Mword = 4 Mbytes */
 #else         /* SUN4 */
 #define OBJECT_SIZE	16384
 #endif
-#endif
-
-#if SUN
-#define TEXT_START      8192
 #endif
 
 /*
@@ -345,11 +312,11 @@ typedef long long IATYPE;
  *   true polling.
  */
 #ifndef PollCount
-#if UNIX
+#if LINUX
 #define PollCount MAXPOSWORD
-#else         /* UNIX */
+#else         /* LINUX */
 #define PollCount 2500
-#endif          /* UNIX */
+#endif          /* LINUX */
 #endif					/* PollCount */
 
 
@@ -373,7 +340,7 @@ typedef long long IATYPE;
 /                   to make the stack larger results in a stack overflow
 /                   error.  Defined in BYTES!
 */
-#if LINUX | WINNT | AIX | SOLARIS
+#if LINUX | WINNT 
 #define STACK_SIZE  (0x100000)      /* Set to 1MB 6/28/09 */
 #endif
 
@@ -411,7 +378,7 @@ typedef long long IATYPE;
 / BINEXT is extension for load modules
 */
 
-#if UNIX
+#if LINUX
 #define PSEP  ':'
 #define PSEP2 ' '
 #define FSEP '/'
@@ -537,7 +504,7 @@ extern char isWin95;                  /* True if running under WinNT */
 #include "osint.h"
 
 #ifdef PRIVATEBLOCKS
-#if WINNT | SUN4 | AIX | LINUX
+#if WINNT | LINUX
 #include "extern32.h"
 #endif          /* WINNT | SUN4 */
 #else					/* PRIVATEBLOCKS */

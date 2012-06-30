@@ -203,9 +203,7 @@ enum ext_type {						/* Executing under:						*/
 /*
  * Function definitions for routines in extrnlib.c
  */
-#if sparc | aix
-#include <memory.h>
-#endif
+/* DS-NEEDED? #include <memory.h>*/
 
 mword     retint Params((int val, union block *presult));
 mword     retnstrt Params((char *s, size_t n, union block *presult));

@@ -42,7 +42,7 @@ This file is part of Macro SPITBOL.
 #define RAW_BIT RAW
 #endif
 
-#if UNIX
+#if LINUX
 #include <sys/stat.h>
 struct  stat	statbuf;
 #if LINUX

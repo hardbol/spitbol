@@ -121,12 +121,7 @@ struct	ioblk	*ioptr;
     /	Execute the proper code based on whose process is the parent and
     /	whose is the child.
     */
-#if SOLARIS
-    interlock = 0;
-    switch ( childpid = vfork() ) {
-#else
     switch ( childpid = fork() ) {
-#endif
         int n;
     case -1:
         /*

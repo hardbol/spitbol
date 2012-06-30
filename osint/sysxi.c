@@ -94,9 +94,9 @@ This file is part of Macro SPITBOL.
 
 #include "port.h"
 
-#if UNIX & EXECFILE & !EXECSAVE
+#if LINUX & EXECFILE & !EXECSAVE
 #include <a.out.h>
-#endif					/* UNIX */
+#endif					/* LINUX */
 
 #include "save.h"
 
@@ -244,7 +244,7 @@ zysxi()
 
         fromfd = openexe( gblargv[0] );
         if (fromfd == -1) {
-#if UNIX
+#if LINUX
             write( STDERRFD, "To create an executable, the file ", 34);
             write( STDERRFD, gblargv[0], length(gblargv[0]));
             wrterr( " must have read (-r) privilege." );

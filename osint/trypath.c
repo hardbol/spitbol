@@ -59,7 +59,7 @@ char *name;
         pathptr = findenv(ucname, length(ucname));
     }
 
-#if UNIX
+#if LINUX
     /* skip leading paren if present */
     if (pathptr && *pathptr == '(')
         pathptr++;

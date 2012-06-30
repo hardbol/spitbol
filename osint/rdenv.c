@@ -50,7 +50,7 @@ char *findenv( vq, vn )
 char *vq;
 int  vn;
 {
-#if WINNT | UNIX
+#if WINNT | LINUX
     char savech;
     char *p;
 

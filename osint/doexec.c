@@ -53,10 +53,9 @@ This file is part of Macro SPITBOL.
 #include <stdlib.h>
 #endif
 
-#if UNIX
+#if LINUX
 char	*getshell();
 char	*pathlast();
-#endif					/* UNIX */
 
 void doexec( scbptr )
 
@@ -66,10 +65,10 @@ struct	scblk	*scbptr;
     word	length;
     char	savech;
     char	*cp;
-#if UNIX
+#if LINUX
     extern char **environ;
     char	*shellpath;
-#endif					/* UNIX */
+#endif					
     length	= scbptr->len;
     cp	= scbptr->str;
 
@@ -92,14 +91,14 @@ struct	scblk	*scbptr;
     }
 #endif
 
-#if UNIX
+#if LINUX
     /*
     /	Use function getshell to get shell's path and function lastpath
     /	to get the last component of the shell's path.
     */
     shellpath = getshell();
     execle( shellpath, pathlast( shellpath ), "-c", cp, (char *)NULL, environ );	/* no return */
-#endif					/* UNIX */
+#endif					/* LINUX */
 
     unmake_c_str(&cp[length], savech);
 }
